@@ -106,7 +106,6 @@ if finnaly_first_list:
                     for second_link in finnaly_second_list:
                         print('\t\t-' + second_link)
                         links.append(second_link)
-                        finnaly_third_list = finnaly_list_response(second_link, HEADERS)
                 else:
                     continue
             except Exception:
