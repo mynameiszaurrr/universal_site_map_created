@@ -6,6 +6,9 @@ import fake_useragent
 user_agent = fake_useragent.UserAgent(verify_ssl=False).random
 start_time = time.time()
 input_url = str(input("Введите адрес сайта в формате http://адрес/ : "))
+url_check = input_url.split('://')[1]
+if url_check[-1] == '/':
+    url_check = url_check[:-1]
 if input_url[-1] == '/':
     input_url = input_url[:-1]
 HEADERS = {
@@ -93,7 +96,7 @@ finnaly_first_list = finnaly_list_response(url=input_url, header=HEADERS)
 
 if finnaly_first_list:
     for first_link in finnaly_first_list:
-        if first_link == 'http://crawler-test.com/':
+        if first_link.split('://') == url_check:
             pass
         else:
             print('\t*' + first_link)
@@ -115,6 +118,6 @@ if finnaly_first_list:
 print(f'Время обработки сайта составило {time.time()-start_time}')
 print(f'Количество найденный ссылок = {len(links)}')
 for link in links:
-    with open('links.txt', 'a') as links_write:
+    with open(f"links.txt", 'a') as links_write:
         links_write.write(f"{link}\n")
-print(f'Все ссылки сохраненны в файле "links_{input_url}.txt"')
+print(f'Все ссылки сохраненны в файле "links.txt"')
